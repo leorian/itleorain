@@ -1,0 +1,180 @@
+JavaScript中常见的字符串操作函数及用法
+
+　　最近几次参加前端实习生招聘的笔试，发现很多笔试题都会考到字符串的处理，比方说去哪儿网笔试题、淘宝的笔试题等。如果你经常参加笔试或者也是一个过来人，相信你也跟我一样，发现字符串的处理是前端招聘过程中最常见的题型之一。这些题有一个特点，站在考官的角度去考虑，它考的不是你会不会，而是你能不能在不借用XX手册或者XX指南再或者百度谷歌的情况下，用比较简洁的方式写出答案来。可惜的是，很多开发人员，当然我也是其中一员，对于很多经常用到的字符串处理函数却不能牢牢记住他们的用法，总不得不去求助于XX手册或者XX指南再或者百度谷歌。而这样做的结果就是，这些非常关键的基础知识却夯的不足够结实，在遇到这些题的时候不得不用N层嵌套的for循环去逐个遍历。这是个信号，当你发现你在做这种类型的题的时候，用的for循环过多，那么注意了，很有可能你已经写偏了。别小看了这些东西，没准在找工作和平常开发中起到大作用。好了，不多说了，我们挨个总结下。难免有遗漏的，如果碰巧被你发现了，欢迎补充或者私信。
+
+　　1、字符串转换
+
+ 
+
+　　字符串转换是最基础的要求和工作，你可以将任何类型的数据都转换为字符串，你可以用下面三种方法的任何一种：
+	
+var num= 19; // 19
+var myStr = num.toString(); // "19"
+
+　　你同样可以这么做：
+	
+var num= 19; // 19
+var myStr = String(num); // "19"
+
+　　或者，再简单点儿：
+	
+var num= 19; // 19
+var myStr = "" +num; // "19"
+
+　　2、字符串分割
+
+ 
+
+　　字符串分割，即将一个字符串分割为多个字符串，JavaScript中给我们提供了一个非常方便的函数，如：
+	
+var myStr = "I,Love,You,Do,you,love,me";
+var substrArray = myStr .split(","); // ["I", "Love", "You", "Do", "you", "love", "me"];
+var arrayLimited = myStr .split(",", 3); // ["I", "Love", "You"];
+
+　　split()的第二个参数，表示返回的字符串数组的最大长度。
+
+　　3、获取字符串长度
+
+　　字符串长度是在开发中经常要用到的，非常简单如下：
+	
+var myStr = "I,Love,You,Do,you,love,me";
+var myStrLength = myStr.length; //25
+
+　　4、查询子字符串
+
+　　很多人都会忘记这几个JavaScript的自带的方法，或者忘记它们的具体用法，从而导致在做题的时候不得不嵌套for循环来做。
+
+　　第一个函数：indexOf()，它从字符串的开头开始查找，找到返回对应坐标，找不到返回-1。如下：
+	
+var myStr = "I,Love,you,Do,you,love,me";
+var index = myStr.indexOf("you"); // 7 ,基于0开始,找不到返回-1
+
+　　第二个函数：lastIndexOf()，它从字符串的末尾开始查找，找到返回对应坐标，找不到返回-1。如下：
+	
+var myStr = "I,Love,you,Do,you,love,me";
+var index = myStr.lastIndexOf("you"); // 14
+
+　　以上两个函数同样接收第二个可选的参数，表示开始查找的位置。
+
+　　5、字符串替换
+
+　　单单查到字符串应该还不会停止，一般题目都还经常会遇到让你查到并替换为你自己的字符串，例如：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var replacedStr = myStr.replace("love","hate");//"I,hate,you,Do,you,love,me"
+
+　　默认只替换第一次查找到的，想要全局替换，需要置上正则全局标识，如：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var replacedStr = myStr.replace(/love/g,"hate");//"I,hate,you,Do,you,hate,me"
+
+　　更多的详解，可参考：http://www.w3school.com.cn/jsref/jsref_replace.asp
+
+　　6、查找给定位置的字符或其字符编码值
+
+　　想要查找给定位置的字符，你可以使用如下函数：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var theChar = myStr.charAt(8);// "o",同样从0开始
+
+　　同样，它的一个兄弟函数就是查找对应位置的字符编码值，如：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var theChar = myStr.charCodeAt(8); //111
+
+　　7、字符串连接
+
+ 　　字符串连接操作可以简单到用一个加法运算符搞定，如：
+	
+var str1 = "I,love,you!";
+var str2 = "Do,you,love,me?";
+var str = str1 + str2 + "Yes!";//"I,love,you!Do,you,love,me?Yes!"
+
+　　同样，JavaScript也自带了相关的函数，如：
+	
+var str1 = "I,love,you!";
+var str2 = "Do,you,love,me?";
+var str = str1.concat(str2);//"I,love,you!Do,you,love,me?"
+
+　　其中concat()函数可以有多个参数，传递多个字符串，拼接多个字符串。
+
+　　8、字符串切割和提取
+
+ 　　有三种可以从字符串中抽取和切割的方法，如：
+
+　　第一种，使用slice():
+	
+var myStr = "I,love,you,Do,you,love,me";
+var subStr = myStr.slice(1,5);//",lov"
+
+　　第二种，使用substring():
+	
+var myStr = "I,love,you,Do,you,love,me";
+var subStr = myStr.substring(1,5); //",lov"
+
+　　第三种，使用substr():
+	
+var myStr = "I,love,you,Do,you,love,me";
+var subStr = myStr.substr(1,5); //",love"
+
+　　与第一种和第二种不同的是，substr()第二个参数代表截取的字符串最大长度，如上结果所示。
+
+ 　　9、字符串大小写转换
+
+　　常用的转换为大写或者小写字符串函数，如下：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var lowCaseStr = myStr.toLowerCase();//"i,love,you,do,you,love,me";
+var upCaseStr = myStr.toUpperCase();//"I,LOVE,YOU,DO,YOU,LOVE,ME"
+
+　　10、字符串匹配
+
+　　字符串匹配可能需要你对正则表达式有一定的了解，先来看看match()函数：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var pattern = /love/;
+var result = myStr.match(pattern);//["love"]
+console.log(result .index);//2
+console.log(result.input );//I,love,you,Do,you,love,me
+
+　　如你所见，match()函数在字符串上调用，并且接受一个正则的参数。来看看第二个例子，使用exec()函数：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var pattern = /love/;
+var result = pattern .exec(myStr);//["love"]
+console.log(result .index);//2
+console.log(result.input );//I,love,you,Do,you,love,me
+
+　　简单吧，仅仅是把正则和字符串换了个位置，即exec()函数是在正则上调用，传递字符串的参数。对于上面两个方法，匹配的结果都是返回第一个匹配成功的字符串，如果匹配失败则返回null.
+
+　　再来看一个类似的方法search(),如：
+	
+var myStr = "I,love,you,Do,you,love,me";
+var pattern = /love/;
+var result = myStr.search(pattern);//2
+
+　　仅返回查到的匹配的下标，如果匹配失败则返回-1.
+
+　　11、字符串比较
+
+　　比较两个字符串，比较是规则是按照字母表顺序比较的，如：
+	
+var myStr = "chicken";
+var myStrTwo = "egg";
+var first = myStr.localeCompare(myStrTwo); // -1
+first = myStr.localeCompare("chicken"); // 0
+first = myStr.localeCompare("apple"); // 1
+
+　　12、举例
+
+　　最后我们来看一道前端笔试题，去哪儿网的，相信很多孩子都做到过这个题了。题目：写一个getSuffix函数，用于获得输入参数的后缀名，例如输入abcd.txt，返回txt。附上我的答案：
+	
+function getSuffix(file){
+      return file.slice(file.lastIndexOf(".") + 1,file.length); 
+}
+
+　　结束语
+
+　　相信JavaScript中字符串操作的函数应该不止这几个，但是上面列的这些应该都是非常常用的。如果有哪些需要补充的，欢迎补充！希望看到这些以后，再面对字符串的笔试面试题你能非常从容的面对。
+
+　　更多请参考：http://www.hunlock.com/blogs/The_Complete_Javascript_Strings_Reference
